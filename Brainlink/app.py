@@ -50,7 +50,7 @@ else:
     st.markdown("""
         <div style="text-align: center; color: #DC2626; padding: 20px; border: 1px solid #DC2626; border-radius: 8px;">
             <h3>파일 로드 실패</h3>
-            <p><strong>app.py</strong>와 <strong>eeg_analysis_dashboard.html</strong> 파일이 동일한 폴더에 있는지 확인하고 
+            <p><strong>app.py</strong>와 <strong>index.html</strong> 파일이 동일한 폴더에 있는지 확인하고 
             파일 이름을 정확하게 맞춰주세요.</p>
         </div>
     """, unsafe_allow_html=True)
