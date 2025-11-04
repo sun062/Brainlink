@@ -9,9 +9,13 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# HTML 파일의 상대 경로 설정
-# (app.py와 index.html이 같은 디렉토리에 있어야 합니다.)
+# HTML 파일의 **절대 경로**를 안전하게 설정
+# 1. __file__을 사용하여 현재 스크립트(app.py)의 경로를 가져옵니다.
+# 2. os.path.dirname()으로 스크립트가 있는 디렉토리를 가져옵니다.
+# 3. os.path.join()으로 디렉토리 경로와 파일 이름을 결합하여 절대 경로를 완성합니다.
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 HTML_FILE_NAME = "index.html"
+HTML_FILE_PATH = os.path.join(BASE_DIR, HTML_FILE_NAME)
 
 
 def load_html_file(file_path):
@@ -21,14 +25,15 @@ def load_html_file(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
             return f.read()
     except FileNotFoundError:
-        st.error(f"오류: HTML 파일을 찾을 수 없습니다. 경로를 확인해주세요: '{file_path}'")
+        # 경로 디버깅을 위해 로드 시도 경로를 출력합니다.
+        st.error(f"오류: HTML 파일을 찾을 수 없습니다. 경로를 확인해주세요: **'{file_path}'**")
         return None
     except Exception as e:
         st.error(f"파일을 읽는 중 오류가 발생했습니다: {e}")
         return None
 
-# HTML 파일 내용 로드
-html_content = load_html_file(HTML_FILE_NAME)
+# HTML 파일 내용 로드 (수정된 절대 경로 사용)
+html_content = load_html_file(HTML_FILE_PATH)
 
 if html_content:
     # Streamlit에 HTML 내용을 임베드합니다.
@@ -36,7 +41,7 @@ if html_content:
     # HTML 내부의 JavaScript/CSS가 모두 포함된 상태로 실행됩니다.
     st.html(
         html_content, 
-        height=2000 
+        height=2000
     )
     
     st.markdown("""
