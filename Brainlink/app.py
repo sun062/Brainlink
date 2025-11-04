@@ -3,7 +3,7 @@ import os
 
 # Streamlit 페이지 설정
 st.set_page_config(
-    page_title="Brainlink 분석 프로그램",
+    page_title="Brainwave Data Analyzer (뇌파 분석 대시보드)",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -30,3 +30,4 @@ except FileNotFoundError:
 
 except Exception as e:
     st.error(f"HTML 파일을 불러오는 중 오류가 발생했습니다: {e}")
+
